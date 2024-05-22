@@ -26,7 +26,7 @@
             ]
         },
         {
-            "name":"Automobile",
+            "name":"Cars",
             "subcategory":[
                 "Cars",
                 "Bikes"
@@ -43,7 +43,7 @@
             ]
         },
         {
-            "name":"Toys",
+            "name":"Sports",
             "subcategory":[
                 "Cycling",
                 "Sneakers",

@@ -3,6 +3,7 @@ import 'package:emart/consts/firebase_consts.dart';
 import 'package:emart/consts/lists.dart';
 import 'package:emart/controlers/auth_controller.dart';
 import 'package:emart/services/firestoreservices.dart';
+import 'package:emart/views/HomeScreen/HomeScreen.dart';
 import 'package:emart/views/authScreen/loginScreen.dart';
 import 'package:emart/views/profile/ProfileController.dart';
 import 'package:emart/views/profile/componets/componets_detailscard.dart';
@@ -17,6 +18,7 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.put(ProfileController());
+    var controllerauth = Get.put(AuthController());
     return bgwidget(Scaffold(
         body: StreamBuilder(
       stream: FireStoreServices.getUser(user!.uid),
@@ -81,9 +83,9 @@ class Profile extends StatelessWidget {
                           style: OutlinedButton.styleFrom(
                               side: BorderSide(color: whiteColor)),
                           onPressed: () async {
-                            await Get.put(
-                                AuthController().signOutMethod(context));
-                            Get.offAll(() => LoginScreen());
+                            controllerauth.signOutMethod(context);
+                            Get.offAll(() => HomeScreen());
+                            AuthController().isloadind(false);
                           },
                           child:
                               "LogOut".text.fontFamily(semibold).white.make())

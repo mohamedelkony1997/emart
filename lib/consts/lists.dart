@@ -1,5 +1,3 @@
-
-
 import 'package:emart/consts/images.dart';
 import 'package:emart/consts/strings.dart';
 
@@ -16,8 +14,8 @@ const categorieslist = [
   automobile,
   kidstoys,
   sports,
-  jewellery,
   cellphone,
+  jewellery,
   womenclothing,
   furniture,
 ];

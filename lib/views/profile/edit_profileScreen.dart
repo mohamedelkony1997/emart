@@ -102,6 +102,7 @@ class Edit_profileScreen extends StatelessWidget {
                                   password:
                                       controller.newpasswordConroller.text);
                               VxToast.show(context, msg: "Updated");
+                              
                             } else {
                               VxToast.show(context, msg: "Wrong Old Password");
                               controller.isLoading(false);

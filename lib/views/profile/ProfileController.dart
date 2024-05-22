@@ -50,15 +50,12 @@ class ProfileController extends GetxController {
     isLoading(false);
   }
 
-  changeAuthpassword({email, password, newpassword, context}) async {
+  changeAuthpassword({email, password, newpassword}) async {
     try {
       final cred =
           EmailAuthProvider.credential(email: email, password: password);
       await user!.reauthenticateWithCredential(cred);
       await user!.updatePassword(newpassword);
-      // Log out the user
-      await Get.put(AuthController().signOutMethod(context));
-      Get.offAll(() => LoginScreen());
     } catch (e) {
       print(e.toString());
     }
