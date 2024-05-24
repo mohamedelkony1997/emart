@@ -6,3 +6,4 @@ FirebaseFirestore firestore = FirebaseFirestore.instance;
 User? user = auth.currentUser;
 
 const usercollection = "users";
+const productioncollection = "products";

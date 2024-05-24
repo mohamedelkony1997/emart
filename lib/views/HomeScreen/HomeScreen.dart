@@ -43,29 +43,35 @@ class HomeScreen extends StatelessWidget {
     ];
     var navBody = [Home(), Categories(), Cart(), Profile()];
     return SafeArea(
-        child: Scaffold(
-      body: Column(
-        children: [
-          Obx(
-            () => Expanded(
-              child: navBody.elementAt(controler.currentIndex.value),
+        child: PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        return null;
+      },
+      child: Scaffold(
+        body: Column(
+          children: [
+            Obx(
+              () => Expanded(
+                child: navBody.elementAt(controler.currentIndex.value),
+              ),
             ),
+          ],
+        ),
+        bottomNavigationBar: Obx(
+          () => BottomNavigationBar(
+            currentIndex: controler.currentIndex.value,
+            items: barItems,
+            selectedItemColor: redColor,
+            type: BottomNavigationBarType.fixed,
+            selectedLabelStyle: TextStyle(
+              fontFamily: semibold,
+            ),
+            backgroundColor: whiteColor,
+            onTap: (value) {
+              controler.currentIndex.value = value;
+            },
           ),
-        ],
-      ),
-      bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
-          currentIndex: controler.currentIndex.value,
-          items: barItems,
-          selectedItemColor: redColor,
-          type: BottomNavigationBarType.fixed,
-          selectedLabelStyle: TextStyle(
-            fontFamily: semibold,
-          ),
-          backgroundColor: whiteColor,
-          onTap: (value) {
-            controler.currentIndex.value = value;
-          },
         ),
       ),
     ));

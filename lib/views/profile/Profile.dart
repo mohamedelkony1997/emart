@@ -17,6 +17,8 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   
+ 
     var controller = Get.put(ProfileController());
     var controllerauth = Get.put(AuthController());
     return bgwidget(Scaffold(
