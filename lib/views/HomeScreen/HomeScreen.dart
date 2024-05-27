@@ -6,6 +6,7 @@ import 'package:emart/views/cart/cart.dart';
 import 'package:emart/views/categories/categories.dart';
 import 'package:emart/views/home/home.dart';
 import 'package:emart/views/profile/Profile.dart';
+import 'package:emart/views/widgit_common/exist_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -46,7 +47,11 @@ class HomeScreen extends StatelessWidget {
         child: PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
-        return null;
+        showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (context) => existDailog(context));
+       
       },
       child: Scaffold(
         body: Column(
