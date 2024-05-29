@@ -8,3 +8,5 @@ User? user = auth.currentUser;
 const usercollection = "users";
 const productioncollection = "products";
 const cartcollection = "cart";
+const chatcollection = "chats";
+const messagecollection = "messages";

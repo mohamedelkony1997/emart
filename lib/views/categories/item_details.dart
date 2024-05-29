@@ -3,6 +3,7 @@ import 'package:emart/consts/colors.dart';
 import 'package:emart/consts/consts.dart';
 import 'package:emart/consts/lists.dart';
 import 'package:emart/controlers/product_controller.dart';
+import 'package:emart/views/ChatScreens/chat_screen.dart';
 import 'package:emart/views/widgit_common/our_buttonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,9 +30,12 @@ class ItemDetails extends StatelessWidget {
       child: Scaffold(
         backgroundColor: whiteColor,
         appBar: AppBar(
-          backgroundColor: redColor,
+            backgroundColor: redColor,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back,color: whiteColor,),
+              icon: Icon(
+                Icons.arrow_back,
+                color: whiteColor,
+              ),
               onPressed: () {
                 controller.clearData();
                 Get.back();
@@ -121,7 +125,11 @@ class ItemDetails extends StatelessWidget {
                           Icons.message_rounded,
                           color: darkFontGrey,
                         ),
-                      ),
+                      ).onTap(() {
+                        Get.to(() => ChatScreen(),arguments: [
+                          data["p_seller"],data["vendor_id"],
+                        ]);
+                      }),
                     ],
                   )
                       .box

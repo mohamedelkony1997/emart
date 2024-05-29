@@ -19,9 +19,17 @@ class FireStoreServices {
         .where("addedBy", isEqualTo: uid)
         .snapshots();
   }
-  static  deleteCartItem(docUid) {
+
+  static deleteCartItem(docUid) {
+    return firestore.collection(cartcollection).doc(docUid).delete();
+  }
+
+  static Stream<QuerySnapshot> getChats(docId)  {
     return firestore
-        .collection(cartcollection)
-        .doc(docUid).delete();
+        .collection(chatcollection)
+        .doc(docId)
+        .collection(messagecollection)
+        .orderBy("created_on", descending: false)
+        .snapshots();
   }
 }
