@@ -49,12 +49,24 @@ class ItemDetails extends StatelessWidget {
                     Icons.share,
                     color: whiteColor,
                   )),
-              IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.favorite_outline,
-                    color: whiteColor,
-                  )),
+              Obx(
+                () => IconButton(
+                    onPressed: () {
+                      if (controller.isFav.value) {
+                        controller.removeToWishList(data.id, context);
+                        controller.isFav(false);
+                      } else {
+                        controller.addToWishList(data.id, context);
+                        controller.isFav(true);
+                      }
+                    },
+                    icon: Icon(
+                      Icons.favorite,
+                      color: controller.isFav.value ? darkFontGrey : whiteColor,
+                      
+
+                    )),
+              ),
             ]),
         body: Column(children: [
           Expanded(
@@ -126,8 +138,9 @@ class ItemDetails extends StatelessWidget {
                           color: darkFontGrey,
                         ),
                       ).onTap(() {
-                        Get.to(() => ChatScreen(),arguments: [
-                          data["p_seller"],data["vendor_id"],
+                        Get.to(() => ChatScreen(), arguments: [
+                          data["p_seller"],
+                          data["vendor_id"],
                         ]);
                       }),
                     ],
@@ -186,7 +199,7 @@ class ItemDetails extends StatelessWidget {
                           () => Row(
                             children: [
                               SizedBox(
-                                width: 100,
+                                width: 90,
                                 child: "Quantity : "
                                     .text
                                     .color(textfieldGrey)

@@ -43,7 +43,7 @@ class AuthController extends GetxController {
       "ImageUrl":"",
       "Id": user!.uid,
       "cart_count": "00",
-      "wishlist_count": "00",
+      "wishlist_count": [],
       "order_count": "00",
     });
   }

@@ -96,22 +96,22 @@ class Profile extends StatelessWidget {
                 ),
                 20.heightBox,
                 Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10),
+                  padding: const EdgeInsets.only(left: 7.0, right: 7),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       detailsCard(
                           count: "${dataprofile["cart_count"]}",
                           title: "In Your Cart",
-                          width: context.screenWidth / 3.4),
+                          width: context.screenWidth / 3.5),
                       detailsCard(
-                          count: "${dataprofile["wishlist_count"]}",
+                          count: "${dataprofile["wishlist_count"].length}",
                           title: "In Your WishList",
-                          width: context.screenWidth / 3.4),
+                          width: context.screenWidth / 3.2),
                       detailsCard(
                           count: "${dataprofile["order_count"]}",
                           title: "Your Orders",
-                          width: context.screenWidth / 3.4),
+                          width: context.screenWidth / 3.5),
                     ],
                   ),
                 ),

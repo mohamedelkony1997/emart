@@ -8,7 +8,7 @@ class HomeControler extends GetxController {
   @override
   onInit() {
     getuserName();
-    getuserImage();
+   
     super.onInit();
   }
 
@@ -23,14 +23,4 @@ class HomeControler extends GetxController {
     userName == n;
   }
 
-  getuserImage() async {
-    var x = await firestore
-        .collection(usercollection)
-        .where("id", isEqualTo: user!.uid)
-        .get()
-        .then((value) {
-      return value.docs.single['ImageUrl'];
-    });
-    userImage == x;
-  }
 }

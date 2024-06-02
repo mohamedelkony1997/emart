@@ -106,7 +106,11 @@ class CategoryDetails extends StatelessWidget {
                                 .margin(EdgeInsets.symmetric(horizontal: 4))
                                 .make()
                                 .onTap(() {
-                              Get.to(ItemDetails(title: product['p_name'],data: product,));
+                              controller.checkIsFav(product);
+                              Get.to(ItemDetails(
+                                title: product['p_name'],
+                                data: product,
+                              ));
                             });
                           },
                         )
