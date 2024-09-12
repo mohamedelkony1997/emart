@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controler = Get.put(HomeControler());
+    var controler = Get.put(HomeController());
     var barItems = [
       BottomNavigationBarItem(
           icon: Image.asset(

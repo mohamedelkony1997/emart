@@ -47,3 +47,13 @@ const profilebuttonsicons = [
   icOrder,
   icMessages,
 ];
+const paymentMethodsimgs = [
+  imgStripe,
+  imgPaypal,
+  imgCod,
+];
+const paymentMethods = [
+  stripe,
+  paypal,
+  cod,
+];

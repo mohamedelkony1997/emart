@@ -8,18 +8,19 @@ class ChatController extends GetxController {
   @override
   void onInit() {
     getChatId();
-    // TODO: implement onInit
     super.onInit();
   }
 
   var chats = firestore.collection(chatcollection);
   var friendName = Get.arguments[0];
   var friendId = Get.arguments[1];
-  var senderName = Get.find<HomeControler>().userName;
+  var senderName =
+      Get.find<HomeController>().userName.value; // Access the string value
   var currentId = user!.uid;
   var msgController = TextEditingController();
   var isLoading = false.obs;
   dynamic chatDocId;
+
   getChatId() async {
     isLoading(true);
     await chats
@@ -64,6 +65,7 @@ class ChatController extends GetxController {
         "msg": msg,
         "uid": currentId,
       });
+      getChatId();
     }
   }
 }

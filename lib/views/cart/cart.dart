@@ -3,6 +3,7 @@ import 'package:emart/consts/consts.dart';
 import 'package:emart/consts/firebase_consts.dart';
 import 'package:emart/controlers/cart_controller.dart';
 import 'package:emart/services/firestoreservices.dart';
+import 'package:emart/views/cart/shipping_info.dart';
 import 'package:emart/views/widgit_common/loading_indactor.dart';
 import 'package:emart/views/widgit_common/our_buttonWidget.dart';
 import 'package:flutter/material.dart';
@@ -16,18 +17,29 @@ class Cart extends StatelessWidget {
     var controller = Get.put(CartController());
     return SafeArea(
         child: Scaffold(
+            bottomNavigationBar: SizedBox(
+              height: 60,
+              child: ourButton(
+                  color: redColor,
+                  onPress: () {
+                    Get.to(() => ShippingInfo());
+                  },
+                  textcolor: whiteColor,
+                  title: "Proceed To Shipping"),
+            ),
             backgroundColor: whiteColor,
             appBar: AppBar(
-               leading: IconButton(
-              icon: Icon(Icons.arrow_back,color: whiteColor,),
-              onPressed: () {
-                
-                Get.back();
-              },
-            ),
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: whiteColor,
+                ),
+                onPressed: () {
+                  Get.back();
+                },
+              ),
               automaticallyImplyLeading: false,
               backgroundColor: redColor,
-
               title: "Shopping Cart"
                   .text
                   .color(whiteColor)
@@ -50,7 +62,8 @@ class Cart extends StatelessWidget {
                   );
                 } else {
                   var data = snapshot.data!.docs;
-                  controller.calculatecart(data);
+                  controller.calculateCart(data);
+                  controller.productSnapshot = data;
                   return Padding(
                     padding: EdgeInsets.all(10),
                     child: Column(
@@ -85,7 +98,6 @@ class Cart extends StatelessWidget {
                               child: Container(
                                 margin: EdgeInsets.only(bottom: 10),
                                 padding: EdgeInsets.all(6),
-                                
                                 decoration: BoxDecoration(
                                   color: lightGrey,
                                   borderRadius: BorderRadius.circular(15),
@@ -184,14 +196,6 @@ class Cart extends StatelessWidget {
                             .color(lightGrey)
                             .rounded
                             .make(),
-                        SizedBox(
-                          width: context.screenWidth - 60,
-                          child: ourButton(
-                              color: redColor,
-                              onPress: () {},
-                              textcolor: whiteColor,
-                              title: "Proceed To Shipping"),
-                        )
                       ],
                     ),
                   );

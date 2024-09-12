@@ -2,7 +2,7 @@
 
 import 'package:emart/consts/consts.dart';
 import 'package:emart/consts/firebase_consts.dart';
-import 'package:emart/views/HomeScreen/HomeScreen.dart';
+import 'package:emart/views/home/HomeScreen.dart';
 import 'package:emart/views/authScreen/loginScreen.dart';
 import 'package:emart/views/widgit_common/logo_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';

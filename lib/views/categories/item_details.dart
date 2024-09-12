@@ -19,7 +19,7 @@ class ItemDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.find<ProductController>();
+       final controller = Get.put(ProductController());
 
     return SafeArea(
         child: PopScope(
@@ -63,8 +63,6 @@ class ItemDetails extends StatelessWidget {
                     icon: Icon(
                       Icons.favorite,
                       color: controller.isFav.value ? darkFontGrey : whiteColor,
-                      
-
                     )),
               ),
             ]),
@@ -326,16 +324,22 @@ class ItemDetails extends StatelessWidget {
             child: ourButton(
               color: redColor,
               onPress: () {
-                controller.addToCart(
+               if(controller.Quantity.value>0){
+                 controller.addToCart(
                   color: data["p_colors"][controller.colorindex.value],
                   context: context,
                   img: data["p_imgs"][0],
+                  vendorId: data['vendor_id'],
                   qty: controller.Quantity.value,
                   sellerName: data["p_seller"],
                   title: data["p_name"],
                   tprice: controller.totalPrice.value,
                 );
-                VxToast.show(context, msg: "Added To Cart");
+                 VxToast.show(context, msg: "Added To Cart");
+               }else{
+                 VxToast.show(context, msg: "Minumm 1 product is required");
+               }
+               
               },
               textcolor: whiteColor,
               title: "Add To Cart",

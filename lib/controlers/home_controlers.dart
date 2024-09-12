@@ -1,26 +1,37 @@
 import 'package:emart/consts/firebase_consts.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeControler extends GetxController {
+class HomeController extends GetxController {
   var currentIndex = 0.obs;
-  var userName = "";
+  var userName = "".obs;
   var userImage = "";
+  var searchcontroller = TextEditingController();
   @override
-  onInit() {
-    getuserName();
-   
+  void onInit() {
     super.onInit();
+    getUserName();
   }
 
-  getuserName() async {
-    var n = await firestore
-        .collection(usercollection)
-        .where("id", isEqualTo: user!.uid)
-        .get()
-        .then((value) {
-      return value.docs.single['Name'];
-    });
-    userName == n;
-  }
+  Future<void> getUserName() async {
+    try {
+      if (user != null) {
+        var querySnapshot = await firestore
+            .collection(usercollection)
+            .where("Id", isEqualTo: user!.uid)
+            .get();
 
+        if (querySnapshot.docs.isNotEmpty) {
+          var userDoc = querySnapshot.docs.single;
+          userName.value = userDoc['Name'] ?? 'N/A';
+        } else {
+          print("No user found with the given ID.");
+        }
+      } else {
+        print("User is null.");
+      }
+    } catch (e) {
+      print("Error fetching user name: $e");
+    }
+  }
 }

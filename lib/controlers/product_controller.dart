@@ -49,6 +49,7 @@ class ProductController extends GetxController {
     color,
     qty,
     tprice,
+    vendorId
   }) {
     firestore.collection(cartcollection).doc().set({
       "title": title,
@@ -57,6 +58,7 @@ class ProductController extends GetxController {
       "color": color,
       "qty": qty,
       "total": tprice,
+      "vendor_id": vendorId,
       "addedBy": user!.uid
     }).catchError((error) {
       VxToast.show(context, msg: error.toString());

@@ -1,46 +1,52 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emart/consts/consts.dart';
 import 'package:emart/consts/firebase_consts.dart';
+import 'package:emart/views/home/HomeScreen.dart';
+import 'package:emart/views/authScreen/loginScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
-  var isloadind = false.obs;
-  var emailConroller = TextEditingController();
-  var passwordConroller = TextEditingController();
-  Future<UserCredential?> loginMethod({context}) async {
+  var isLoading = false.obs;
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+
+  Future<UserCredential?> loginMethod({required BuildContext context}) async {
     UserCredential? userCredential;
     try {
       userCredential = await auth.signInWithEmailAndPassword(
-          email: emailConroller.text, password: passwordConroller.text);
+        email: emailController.text, 
+        password: passwordController.text
+      );
     } on FirebaseAuthException catch (e) {
-      VxToast.show(context, msg: e.toString());
+      VxToast.show(context, msg: e.message ?? "An error occurred");
     }
 
     return userCredential;
   }
 
-  Future<UserCredential?> signUpMethod({email, password, context}) async {
+  Future<UserCredential?> signUpMethod({required String email, required String password, required BuildContext context}) async {
     UserCredential? userCredential;
     try {
       userCredential = await auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+        email: email, 
+        password: password
+      );
     } on FirebaseAuthException catch (e) {
-      VxToast.show(context, msg: e.toString());
+      VxToast.show(context, msg: e.message ?? "An error occurred");
     }
 
     return userCredential;
   }
 
-  storeUserdate({name, email, password}) async {
-    DocumentReference store =
-        await firestore.collection(usercollection).doc(user!.uid);
-    store.set({
+  Future<void> storeUserData({required String name, required String email, required String password}) async {
+    DocumentReference store = firestore.collection(usercollection).doc(user!.uid);
+    await store.set({
       "Name": name,
       "Email": email,
       "Password": password,
-      "ImageUrl":"",
+      "ImageUrl": "",
       "Id": user!.uid,
       "cart_count": "00",
       "wishlist_count": [],
@@ -48,11 +54,12 @@ class AuthController extends GetxController {
     });
   }
 
-  signOutMethod(context) async {
+  Future<void> signOutMethod(BuildContext context) async {
     try {
       await auth.signOut();
+      Get.offAll(() => HomeScreen());
     } catch (e) {
-      VxToast.show(context, msg: e.toString());
+      Get.snackbar("Error", "Failed to sign out: $e", snackPosition: SnackPosition.BOTTOM);
     }
   }
 }
